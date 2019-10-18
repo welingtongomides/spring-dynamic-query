@@ -29,15 +29,14 @@ public class DynamicQueryRepositoryImpl implements DynamicQueryRepository {
 	private EntityManager entityManager;
 
 	@Override
-	public <T> List<T> findAll(String namedQuery, DynamicParameters parameters, Class<T> entityClass) {
+	public <T> List<T> find(String namedQuery, DynamicParameters parameters, Class<T> entityClass) {
 		DynamicQuery dynamicQuery = new DynamicQuery(entityManager, getQuery(namedQuery),
 				parameters.getMapParameters());
 		return dynamicQuery.getQuery().getResultList();
 	}
 
 	@Override
-	public <T> Page<T> findAll(String namedQuery, DynamicParameters parameters, Pageable pageable,
-			Class<T> entityClass) {
+	public <T> Page<T> find(String namedQuery, DynamicParameters parameters, Pageable pageable, Class<T> entityClass) {
 		String query = getQuery(namedQuery);
 		DynamicQuery dynamicQuery = new DynamicQuery(entityManager, query, parameters.getMapParameters());
 		return new PageImpl<>(dynamicQuery.getPaginationQuery(pageable).getResultList(), pageable,

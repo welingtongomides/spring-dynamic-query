@@ -14,9 +14,9 @@ import br.com.devsuite.spring.dynamicquery.parameters.DynamicParameters;
  */
 public interface DynamicNativeQueryRepository {
 
-	public <T> List<T> findAllNative(final String source, final DynamicParameters parameters);
+	public <T> List<T> findNative(final String source, final DynamicParameters parameters);
 
-	public <T> Page<T> findAllNative(String source, DynamicParameters parameters, Pageable pagination);
+	public <T> Page<T> findNative(String source, DynamicParameters parameters, Pageable pagination);
 
 	public <T> T findOneNative(final String source, final DynamicParameters parameters);
 

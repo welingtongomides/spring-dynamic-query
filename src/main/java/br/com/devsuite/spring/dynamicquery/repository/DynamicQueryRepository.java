@@ -14,10 +14,9 @@ import br.com.devsuite.spring.dynamicquery.parameters.DynamicParameters;
  */
 public interface DynamicQueryRepository {
 
-	public <T> List<T> findAll(final String namedQuery, final DynamicParameters parameters, Class<T> entityClass);
+	public <T> List<T> find(final String namedQuery, final DynamicParameters parameters, Class<T> entityClass);
 
-	public <T> Page<T> findAll(String namedQuery, DynamicParameters parameters, Pageable pageable,
-			Class<T> entityClass) ;
+	public <T> Page<T> find(String namedQuery, DynamicParameters parameters, Pageable pageable, Class<T> entityClass);
 
 	public <T> T findOne(final String namedQuery, final DynamicParameters parameters, Class<T> entityClass);
 
