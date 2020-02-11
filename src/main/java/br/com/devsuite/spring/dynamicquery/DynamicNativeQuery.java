@@ -55,7 +55,7 @@ public class DynamicNativeQuery {
 				postParsers);
 
 		queryNative.setMaxResults(pagination.getPageSize());
-		queryNative.setFirstResult((pagination.getPageNumber() - 1) * pagination.getPageSize());
+		queryNative.setFirstResult(pagination.getPageNumber() * pagination.getPageSize());
 
 		return queryNative;
 

@@ -54,7 +54,7 @@ public class DynamicQuery {
 		Query hqlQuery = QueryParser.getInstance().parseQuery(em, false, null, paginationQuery, params, false,
 				postParsers);
 		hqlQuery.setMaxResults(pagination.getPageSize());
-		hqlQuery.setFirstResult((pagination.getPageNumber() - 1) * pagination.getPageSize());
+		hqlQuery.setFirstResult(pagination.getPageNumber() * pagination.getPageSize());
 		return hqlQuery;
 	}
 
