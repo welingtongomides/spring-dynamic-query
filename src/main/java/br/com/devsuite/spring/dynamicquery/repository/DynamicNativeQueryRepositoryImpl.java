@@ -1,6 +1,7 @@
 package br.com.devsuite.spring.dynamicquery.repository;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,8 +42,18 @@ public class DynamicNativeQueryRepositoryImpl implements DynamicNativeQueryRepos
 	public <T> Page<T> findNative(String source, DynamicParameters parameters, Pageable pageable) {
 		DynamicNativeQuery dynamicQuery = new DynamicNativeQuery(entityManager, getQuerySql(source),
 				parameters.getMapParameters());
-		return new PageImpl<>(dynamicQuery.getPaginationQuery(pageable).getResultList(), pageable,
-				((BigDecimal) dynamicQuery.getCountQuery().getSingleResult()).longValue());
+		
+		Object count = dynamicQuery.getCountQuery().getSingleResult();
+		Long countLong = null; 
+		if (count instanceof BigInteger) {
+		    countLong = ((BigInteger) count).longValue();
+		} else if (count instanceof BigDecimal) {
+		    countLong = ((BigDecimal) count).longValue();
+		} else {
+		    countLong = Long.valueOf(count.toString());
+		}
+		
+		return new PageImpl<>(dynamicQuery.getPaginationQuery(pageable).getResultList(), pageable, countLong);
 	}
 
 	@Override

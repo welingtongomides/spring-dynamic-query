@@ -7,7 +7,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-
+import org.apache.commons.lang3.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -110,7 +110,13 @@ public final class QueryGenerator {
 
 	private String queryCount(final boolean nativeQuery, String sql) {
 		if (nativeQuery) {
-			return sql = new StringBuilder("SELECT COUNT (0) FROM (").append(sql).append(BLOCK_CLOSE).toString();
+            return sql = new StringBuilder("SELECT COUNT (0) FROM (")
+                    .append(sql)
+                    .append(BLOCK_CLOSE)
+                    .append(" ")
+                    // alias obrigatorio em subquery
+                    .append(RandomStringUtils.randomAlphabetic(5))
+                    .toString();
 		}
 		int fromPos = sql.toUpperCase().indexOf("FROM");
 		sql = sql.substring(fromPos + 5);
