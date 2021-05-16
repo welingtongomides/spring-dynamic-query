@@ -32,6 +32,10 @@ public final class NamedQueryCache {
 		return instance;
 	}
 
+	public Boolean containsKey(String namedQueryName) {
+		return mapQueryCache.containsKey(namedQueryName);
+	}
+
 	public Optional<String> getQuery(String namedQueryName) {
 		if (mapQueryCache.containsKey(namedQueryName)) {
 			return Optional.of(mapQueryCache.get(namedQueryName));

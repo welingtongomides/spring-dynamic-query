@@ -8,6 +8,8 @@ import java.util.Optional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -31,6 +33,9 @@ public class DynamicNativeQueryRepositoryImpl implements DynamicNativeQueryRepos
 	@PersistenceContext
 	private EntityManager entityManager;
 
+	@Autowired
+	private AnnotationConfigServletWebServerApplicationContext resourceLoader;
+
 	@Override
 	public <T> List<T> findNative(final String source, final DynamicParameters parameters) {
 		DynamicNativeQuery dynamicQuery = new DynamicNativeQuery(entityManager, getQuerySql(source),
@@ -42,17 +47,17 @@ public class DynamicNativeQueryRepositoryImpl implements DynamicNativeQueryRepos
 	public <T> Page<T> findNative(String source, DynamicParameters parameters, Pageable pageable) {
 		DynamicNativeQuery dynamicQuery = new DynamicNativeQuery(entityManager, getQuerySql(source),
 				parameters.getMapParameters());
-		
+
 		Object count = dynamicQuery.getCountQuery().getSingleResult();
-		Long countLong = null; 
+		Long countLong = null;
 		if (count instanceof BigInteger) {
-		    countLong = ((BigInteger) count).longValue();
+			countLong = ((BigInteger) count).longValue();
 		} else if (count instanceof BigDecimal) {
-		    countLong = ((BigDecimal) count).longValue();
+			countLong = ((BigDecimal) count).longValue();
 		} else {
-		    countLong = Long.valueOf(count.toString());
+			countLong = Long.valueOf(count.toString());
 		}
-		
+
 		return new PageImpl<>(dynamicQuery.getPaginationQuery(pageable).getResultList(), pageable, countLong);
 	}
 
@@ -71,6 +76,10 @@ public class DynamicNativeQueryRepositoryImpl implements DynamicNativeQueryRepos
 	}
 
 	private String getQuerySql(final String source) {
+		if (!NamedNativeQueryCache.get().containsKey(source) && !FileNativeQueryCache.get().containsKey(source)) {
+			NamedNativeQueryCache.get().inicializeCache(entityManager);
+			FileNativeQueryCache.get().inicializeCache(resourceLoader);
+		}
 		Optional<String> query = NamedNativeQueryCache.get().getQuery(source);
 		if (!query.isPresent()) {
 			query = FileNativeQueryCache.get().getQuery(source);

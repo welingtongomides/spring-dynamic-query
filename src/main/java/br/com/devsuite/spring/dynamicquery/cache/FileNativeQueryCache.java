@@ -42,14 +42,19 @@ public final class FileNativeQueryCache {
 		return instance;
 	}
 
-	public Optional<String> getQuery(String namedQueryName) {
-		namedQueryName += SQL;
-		if (mapQueryCache.containsKey(namedQueryName)) {
-			return Optional.of(mapQueryCache.get(namedQueryName));
+	public Boolean containsKey(String fileSource) {
+		return mapQueryCache.containsKey(fileSource + SQL);
+	}
+
+	public Optional<String> getQuery(String fileSource) {
+		fileSource += SQL;
+		if (mapQueryCache.containsKey(fileSource)) {
+			return Optional.of(mapQueryCache.get(fileSource));
 		}
 		return Optional.empty();
 	}
 
+	@SuppressWarnings("deprecation")
 	public void inicializeCache(AnnotationConfigServletWebServerApplicationContext resourceLoader)
 			throws DynamicQueryException {
 		try {

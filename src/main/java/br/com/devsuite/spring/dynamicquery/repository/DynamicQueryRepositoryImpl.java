@@ -58,6 +58,9 @@ public class DynamicQueryRepositoryImpl implements DynamicQueryRepository {
 	}
 
 	private String getQuery(final String source) {
+		if (!NamedQueryCache.get().containsKey(source)) {
+			NamedQueryCache.get().inicializeCache(entityManager);
+		}
 		Optional<String> query = NamedQueryCache.get().getQuery(source);
 		query.orElseThrow(() -> new DynamicQueryException("Dynamic query source not found: " + source));
 		return query.get();
