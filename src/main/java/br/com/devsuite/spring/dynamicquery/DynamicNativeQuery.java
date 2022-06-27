@@ -15,9 +15,9 @@ import br.com.devsuite.spring.dynamicquery.parser.QueryParser;
 /**
  * Abstração para queries de pesquisa , que pode possuir diversos parametros
  * opcionais para querys Nativas
- * 
+ *
  * @author Welington Gomides - welingtong@gmail.com
- * 
+ *
  *
  */
 public class DynamicNativeQuery {
@@ -51,7 +51,12 @@ public class DynamicNativeQuery {
 			throw new DynamicQueryException("Dever ser informado o campo Pageable!");
 		}
 
-		Query queryNative = QueryParser.getInstance().parseQuery(em, true, resultClass, query, params, false,
+        String paginationQuery = query;
+        if (pagination.getSort().isSorted()) {
+            paginationQuery += " ORDER BY " + pagination.getSort().toString().replace(":", "");
+        }
+
+		Query queryNative = QueryParser.getInstance().parseQuery(em, true, resultClass, paginationQuery, params, false,
 				postParsers);
 
 		queryNative.setMaxResults(pagination.getPageSize());
