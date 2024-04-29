@@ -1,8 +1,5 @@
 package br.com.devsuite.spring.dynamicquery.configuration;
 
-import javax.annotation.PostConstruct;
-import javax.persistence.EntityManager;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext;
 import org.springframework.context.annotation.Configuration;
@@ -11,6 +8,8 @@ import org.springframework.stereotype.Component;
 import br.com.devsuite.spring.dynamicquery.cache.FileNativeQueryCache;
 import br.com.devsuite.spring.dynamicquery.cache.NamedNativeQueryCache;
 import br.com.devsuite.spring.dynamicquery.cache.NamedQueryCache;
+import jakarta.annotation.PostConstruct;
+import jakarta.persistence.EntityManager;
 
 /**
  * Inicialização dos caches.

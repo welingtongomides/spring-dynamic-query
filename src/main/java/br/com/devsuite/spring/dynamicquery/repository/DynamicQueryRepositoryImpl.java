@@ -3,9 +3,6 @@ package br.com.devsuite.spring.dynamicquery.repository;
 import java.util.List;
 import java.util.Optional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -15,6 +12,8 @@ import br.com.devsuite.spring.dynamicquery.DynamicQuery;
 import br.com.devsuite.spring.dynamicquery.cache.NamedQueryCache;
 import br.com.devsuite.spring.dynamicquery.exception.DynamicQueryException;
 import br.com.devsuite.spring.dynamicquery.parameters.DynamicParameters;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 
 /**
  * 

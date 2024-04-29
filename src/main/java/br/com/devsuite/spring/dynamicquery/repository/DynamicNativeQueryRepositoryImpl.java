@@ -5,9 +5,6 @@ import java.math.BigInteger;
 import java.util.List;
 import java.util.Optional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext;
 import org.springframework.data.domain.Page;
@@ -20,6 +17,8 @@ import br.com.devsuite.spring.dynamicquery.cache.FileNativeQueryCache;
 import br.com.devsuite.spring.dynamicquery.cache.NamedNativeQueryCache;
 import br.com.devsuite.spring.dynamicquery.exception.DynamicQueryException;
 import br.com.devsuite.spring.dynamicquery.parameters.DynamicParameters;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 
 /**
  * 

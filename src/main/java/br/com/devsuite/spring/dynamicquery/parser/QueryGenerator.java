@@ -5,8 +5,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +12,8 @@ import org.slf4j.LoggerFactory;
 import br.com.devsuite.spring.dynamicquery.exception.DynamicQueryException;
 import br.com.devsuite.spring.dynamicquery.model.NullCondition;
 import br.com.devsuite.spring.dynamicquery.model.QueryConditionalClause;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
 
 /**
  * 

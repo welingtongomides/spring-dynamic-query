@@ -3,14 +3,13 @@ package br.com.devsuite.spring.dynamicquery;
 import java.util.List;
 import java.util.Map;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
-
 import org.springframework.data.domain.Pageable;
 
 import br.com.devsuite.spring.dynamicquery.exception.DynamicQueryException;
 import br.com.devsuite.spring.dynamicquery.parser.PostParser;
 import br.com.devsuite.spring.dynamicquery.parser.QueryParser;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
 
 /**
  * Abstração para queries de pesquisa , que pode possuir diversos parametros

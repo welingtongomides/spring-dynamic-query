@@ -9,12 +9,11 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
-
 import br.com.devsuite.spring.dynamicquery.exception.DynamicQueryException;
 import br.com.devsuite.spring.dynamicquery.model.ParenthesisBlock;
 import br.com.devsuite.spring.dynamicquery.model.QueryConditionalClause;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
 
 /**
  * 
